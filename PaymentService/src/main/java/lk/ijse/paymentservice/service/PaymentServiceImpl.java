@@ -28,6 +28,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     private ModelMapper modelMapper;
 
+<<<<<<< HEAD
     @Override
     public ResponseDTO savePaymentAndTransaction(PaymentDTO paymentDTO) {
         System.out.println("Processing payment and transaction for location: " + paymentDTO.getParkingLocation());
@@ -36,6 +37,32 @@ public class PaymentServiceImpl implements PaymentService {
             if (paymentDTO == null) {
                 System.out.println("Error: Payment data is null");
                 return new ResponseDTO(VarList.Bad_Request, "Payment data cannot be null", null);
+=======
+@Override
+public ResponseDTO savePaymentAndTransaction(PaymentDTO paymentDTO) {
+    System.out.println("Processing payment and transaction for location: " + paymentDTO.getParkingLocation());
+
+    try {
+        if (paymentDTO == null) {
+            System.out.println("Error: Payment data is null");
+            return new ResponseDTO(VarList.Bad_Request, "Payment data cannot be null", null);
+        }
+
+        Parking parking = parkingRepo.findByLocation(paymentDTO.getParkingLocation().toLowerCase());
+        if (parking == null) {
+            System.out.println("Error: Parking location not found - " + paymentDTO.getParkingLocation());
+            return new ResponseDTO(VarList.Not_Found, "Parking location not found", null);
+        }
+
+        Payment payment = modelMapper.map(paymentDTO, Payment.class);
+        payment.setAmount(parking.getPayAmount());
+
+        if(parking.isAvailable()){
+            Payment savedPayment = paymentRepo.save(payment);
+            if (savedPayment == null) {
+                System.out.println("Error: Failed to save payment");
+                return new ResponseDTO(VarList.Conflict, "Failed to save payment", null);
+>>>>>>> 396d9236c212694755483116a10aa5287d45bab1
             }
 
             Parking parking = parkingRepo.findByLocation(paymentDTO.getParkingLocation().toLowerCase());
