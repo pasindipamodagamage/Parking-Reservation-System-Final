@@ -1,6 +1,5 @@
 package lk.ijse.parkingspaceservice.controller;
 
-
 import lk.ijse.parkingspaceservice.dto.ParkingDTO;
 import lk.ijse.parkingspaceservice.dto.ResponseDTO;
 import lk.ijse.parkingspaceservice.service.ParkingService;
@@ -121,7 +120,3 @@ public class ParkingController {
     }
 
     }
-
-
-
-

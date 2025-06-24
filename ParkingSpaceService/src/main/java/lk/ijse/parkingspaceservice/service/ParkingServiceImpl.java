@@ -1,6 +1,5 @@
 package lk.ijse.parkingspaceservice.service;
 
-
 import lk.ijse.parkingspaceservice.config.RandomNumberGenarator;
 import lk.ijse.parkingspaceservice.dto.ParkingDTO;
 import lk.ijse.parkingspaceservice.entity.Parking;
