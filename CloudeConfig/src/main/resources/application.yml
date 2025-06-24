@@ -8,7 +8,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/dvish2003/spms_config.git
+          uri: https://github.com/pasindipamodagamage/cloud-config-yml.git
           default-label: main
           username: pasindipamodagamage
 
