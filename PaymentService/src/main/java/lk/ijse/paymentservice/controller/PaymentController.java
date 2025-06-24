@@ -1,7 +1,5 @@
 package lk.ijse.paymentservice.controller;
 
-
-import jakarta.ws.rs.POST;
 import lk.ijse.parkingspaceservice.dto.ParkingDTO;
 import lk.ijse.paymentservice.dto.ResponseDTO;
 import lk.ijse.paymentservice.util.VarList;
@@ -14,11 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.List;
 
 @RestController

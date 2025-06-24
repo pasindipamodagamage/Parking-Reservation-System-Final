@@ -1,6 +1,5 @@
 package lk.ijse.paymentservice.service;
 
-
 import lk.ijse.parkingspaceservice.util.VarList;
 import lk.ijse.paymentservice.dto.PaymentDTO;
 import lk.ijse.paymentservice.dto.ResponseDTO;
@@ -23,14 +22,11 @@ public class PaymentServiceImpl implements PaymentService{
     @Autowired
     private PaymentRepo paymentRepo;
 
- @Autowired
+    @Autowired
     private ParkingRepo parkingRepo;
-
 
     @Autowired
     private ModelMapper modelMapper;
-
-
 
 @Override
 public ResponseDTO savePaymentAndTransaction(PaymentDTO paymentDTO) {

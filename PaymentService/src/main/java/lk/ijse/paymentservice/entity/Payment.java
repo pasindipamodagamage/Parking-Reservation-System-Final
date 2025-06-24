@@ -1,6 +1,5 @@
 package lk.ijse.paymentservice.entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
