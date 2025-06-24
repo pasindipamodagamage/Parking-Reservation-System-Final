@@ -5,7 +5,7 @@ spring:
   application:
     name: user-service
   datasource:
-    url: jdbc:mysql://localhost:3306/SmartParkingSystem?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/ParkingReservationSystem?createDatabaseIfNotExist=true
     username: root
     password: Ijse@123
     driver-class-name: com.mysql.cj.jdbc.Driver
