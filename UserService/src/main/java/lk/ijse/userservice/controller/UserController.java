@@ -1,8 +1,8 @@
 package lk.ijse.userservice.controller;
 
+import lk.ijse.userservice.dto.AuthDTO;
 import lk.ijse.userservice.dto.ResponseDTO;
 import lk.ijse.userservice.dto.UserDTO;
-import lk.ijse.userservice.dto.AuthDTO;
 import lk.ijse.userservice.service.UserService;
 import lk.ijse.userservice.util.VarList;
 import org.springframework.beans.factory.annotation.Autowired;

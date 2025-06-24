@@ -22,10 +22,10 @@ public class VehicleController {
     @PostMapping(value = "/saveVehicle")
     public ResponseEntity<ResponseDTO> createVehicle(@RequestBody VehicleDTO vehicleDTO) {
         System.out.println("Create vehicle : ..." + vehicleDTO);
-        try{
+        try {
 
             int res = vehicleService.saveVehicle(vehicleDTO);
-            switch (res){
+            switch (res) {
                 case VarList.All_Ready_Added -> {
                     System.out.println("All ready Added vehicle : ...");
                     ResponseDTO response = new ResponseDTO(VarList.All_Ready_Added, "Vehicle Already Exists", null);
@@ -34,7 +34,7 @@ public class VehicleController {
                 }
                 case VarList.Created -> {
                     System.out.println("Create Vehicle Success");
-                    return  ResponseEntity.ok((new ResponseDTO(VarList.Created, "Vehicle created successfully", vehicleDTO)));
+                    return ResponseEntity.ok((new ResponseDTO(VarList.Created, "Vehicle created successfully", vehicleDTO)));
                 }
                 case VarList.Not_Found -> {
                     System.out.println("Not found User : ...");
@@ -49,7 +49,7 @@ public class VehicleController {
                 }
 
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new RuntimeException();
         }
@@ -58,9 +58,9 @@ public class VehicleController {
     @PutMapping(value = "/updateVehicle")
     public ResponseEntity<ResponseDTO> updateVehicle(@RequestBody VehicleDTO vehicleDTO) {
         System.out.println("Update vehicle : ..." + vehicleDTO);
-        try{
+        try {
             int res = vehicleService.updateVehicle(vehicleDTO);
-            switch (res){
+            switch (res) {
                 case VarList.Not_Found -> {
                     System.out.println("Not found vehicle : ...");
                     ResponseDTO response = new ResponseDTO(VarList.All_Ready_Added, "Not found Details", null);
@@ -69,7 +69,7 @@ public class VehicleController {
                 }
                 case VarList.Created -> {
                     System.out.println("Update Vehicle Success");
-                    return  ResponseEntity.ok((new ResponseDTO(VarList.Created, "Vehicle Update successfully", vehicleDTO)));
+                    return ResponseEntity.ok((new ResponseDTO(VarList.Created, "Vehicle Update successfully", vehicleDTO)));
                 }
                 default -> {
                     System.out.println("Internal server error");
@@ -79,7 +79,7 @@ public class VehicleController {
                 }
 
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new RuntimeException();
         }
@@ -88,12 +88,12 @@ public class VehicleController {
     @DeleteMapping(value = "/deleteVehicle")
     public ResponseEntity<ResponseDTO> DeleteVehicle(@RequestBody VehicleDTO vehicleDTO) {
         System.out.println("Delete vehicle : ..." + vehicleDTO);
-        try{
+        try {
             int res = vehicleService.deleteVehicle(vehicleDTO);
-            switch (res){
+            switch (res) {
                 case VarList.OK -> {
                     System.out.println("Delete Vehicle Success");
-                    return  ResponseEntity.ok((new ResponseDTO(VarList.Created, "Vehicle Delete successfully", vehicleDTO)));
+                    return ResponseEntity.ok((new ResponseDTO(VarList.Created, "Vehicle Delete successfully", vehicleDTO)));
                 }
 
                 case VarList.Not_Found -> {
@@ -118,16 +118,17 @@ public class VehicleController {
     @GetMapping(value = "/getVehicleByPlateNumber")
     public ResponseEntity<ResponseDTO> getVehicleById(@RequestBody VehicleDTO vehicleDTO) {
         System.out.println("Get vehicle by plate number : ..." + vehicleDTO);
-       try{
-           VehicleDTO vehicleDTO1 = vehicleService.getVehicleByNumberPlate(vehicleDTO.getLicensePlate());
+        try {
+            VehicleDTO vehicleDTO1 = vehicleService.getVehicleByNumberPlate(vehicleDTO.getLicensePlate());
 
-           if(vehicleDTO1 == null){
-               return ResponseEntity.ofNullable(new ResponseDTO(VarList.Not_Found,"Not found vehicle",null));
-           }else{
-               return ResponseEntity.ok(new ResponseDTO(VarList.OK,"Vehicle details", vehicleDTO1));
-           }}catch (Exception e){
-           throw new RuntimeException();
-       }
+            if (vehicleDTO1 == null) {
+                return ResponseEntity.ofNullable(new ResponseDTO(VarList.Not_Found, "Not found vehicle", null));
+            } else {
+                return ResponseEntity.ok(new ResponseDTO(VarList.OK, "Vehicle details", vehicleDTO1));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
     }
 
     @GetMapping(value = "/getAllVehicle")
