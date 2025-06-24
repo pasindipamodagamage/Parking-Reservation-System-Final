@@ -1,8 +1,9 @@
 package lk.ijse.paymentservice.entity;
 
-
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @Entity
-public class Payment{
+public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID paymentId;

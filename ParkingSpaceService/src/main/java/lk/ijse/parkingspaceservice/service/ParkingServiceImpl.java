@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @Service
 @Transactional
-public class ParkingServiceImpl implements ParkingService{
+public class ParkingServiceImpl implements ParkingService {
     @Autowired
     private UserRepository userRepository;
 
@@ -29,12 +29,12 @@ public class ParkingServiceImpl implements ParkingService{
     private ModelMapper modelMapper;
 
 
-@Override
-public int saveParkingPlace(ParkingDTO parkingDTO){
+    @Override
+    public int saveParkingPlace(ParkingDTO parkingDTO) {
         System.out.println("saveParkingPlace");
-        try{
-            if(userRepository.existsUserByEmail(parkingDTO.getEmail().toLowerCase())){
-                if(parkingRepo.existsParkingByLocation(parkingDTO.getLocation())){
+        try {
+            if (userRepository.existsUserByEmail(parkingDTO.getEmail().toLowerCase())) {
+                if (parkingRepo.existsParkingByLocation(parkingDTO.getLocation())) {
                     return VarList.All_Ready_Added;
                 }
                 Parking parking = modelMapper.map(parkingDTO, Parking.class);
@@ -51,19 +51,19 @@ public int saveParkingPlace(ParkingDTO parkingDTO){
                 return VarList.Created;
             }
             return VarList.Not_Found;
-        }catch (Exception e){
-            System.out.println("Exception"+e.getMessage());
-            throw  new RuntimeException();
+        } catch (Exception e) {
+            System.out.println("Exception" + e.getMessage());
+            throw new RuntimeException();
         }
-        }
+    }
 
 
-        @Override
-        public int updateParkingPlace(ParkingDTO parkingDTO){
-        System.out.println("updateParkingPlace  "+parkingDTO);
+    @Override
+    public int updateParkingPlace(ParkingDTO parkingDTO) {
+        System.out.println("updateParkingPlace  " + parkingDTO);
         try {
-            if(userRepository.existsUserByEmail(parkingDTO.getEmail().toLowerCase())){
-                if(parkingRepo.existsParkingById(parkingDTO.getId())){
+            if (userRepository.existsUserByEmail(parkingDTO.getEmail().toLowerCase())) {
+                if (parkingRepo.existsParkingById(parkingDTO.getId())) {
                     Parking parking = parkingRepo.findById(parkingDTO.getId()).get();
                     parking.setAvailable(true);
                     parking.setPayAmount(parkingDTO.getPayAmount());
@@ -80,64 +80,66 @@ public int saveParkingPlace(ParkingDTO parkingDTO){
         }
     }
 
-@Override
-public int ReservationUpdateParkingPlace(String Location){
-        System.out.println("Booking location "+Location);
-        try{
-            if(parkingRepo.existsParkingByLocation(Location.toLowerCase())){
+    @Override
+    public int ReservationUpdateParkingPlace(String Location) {
+        System.out.println("Booking location " + Location);
+        try {
+            if (parkingRepo.existsParkingByLocation(Location.toLowerCase())) {
                 Parking parking = parkingRepo.findByLocation(Location.toLowerCase());
-                if(parking.isAvailable()){
+                if (parking.isAvailable()) {
                     parking.setAvailable(false);
                     parkingRepo.save(parking);
                     return VarList.Created;
                 }
-              return VarList.Not_Found;
+                return VarList.Not_Found;
             }
             return VarList.Not_Found;
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public int deleteParkingPlace(UUID id, String email, int LocationCode){
+    public int deleteParkingPlace(UUID id, String email, int LocationCode) {
 
         System.out.println("deleteParkingPlace");
-        try{
-            if(userRepository.existsUserByEmail(email.toLowerCase())){
-                if(parkingRepo.existsById(id) || parkingRepo.existsParkingByLocationCode(LocationCode)){
+        try {
+            if (userRepository.existsUserByEmail(email.toLowerCase())) {
+                if (parkingRepo.existsById(id) || parkingRepo.existsParkingByLocationCode(LocationCode)) {
                     Parking parking = parkingRepo.findById(id).get();
                     parkingRepo.delete(parking);
                     return VarList.OK;
                 }
             }
             return VarList.Not_Found;
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException();
         }
     }
 
     @Override
-    public List<ParkingDTO> getParkingPlaceCity(String city){
+    public List<ParkingDTO> getParkingPlaceCity(String city) {
         System.out.println("getParkingPlaceCity");
-        if(parkingRepo.existsParkingByCity(city.toLowerCase())){
+        if (parkingRepo.existsParkingByCity(city.toLowerCase())) {
             List<Parking> parkingList = parkingRepo.findAllByCity(city);
             List<Parking> parkingList2 = new ArrayList<>();
-            for(Parking parking:parkingList){
-                if(parking.isAvailable()){
+            for (Parking parking : parkingList) {
+                if (parking.isAvailable()) {
                     parkingList2.add(parking);
                 }
             }
-            return modelMapper.map(parkingList2,new TypeToken<List<ParkingDTO>>(){}.getType());
+            return modelMapper.map(parkingList2, new TypeToken<List<ParkingDTO>>() {
+            }.getType());
         }
         return null;
 
     }
 
     @Override
-    public List<ParkingDTO> getAllParkingPlace(){
+    public List<ParkingDTO> getAllParkingPlace() {
         List<Parking> parkingList = parkingRepo.findAll();
-        return modelMapper.map(parkingList,new TypeToken<List<ParkingDTO>>(){}.getType());
+        return modelMapper.map(parkingList, new TypeToken<List<ParkingDTO>>() {
+        }.getType());
     }
 
 }

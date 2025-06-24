@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface ParkingRepo  extends JpaRepository<Parking, UUID> {
+public interface ParkingRepo extends JpaRepository<Parking, UUID> {
     boolean existsParkingByLocation(String location);
 
     Parking findByLocation(String location);

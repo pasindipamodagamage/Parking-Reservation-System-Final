@@ -1,12 +1,10 @@
 package lk.ijse.paymentservice.controller;
 
-
-import jakarta.ws.rs.POST;
 import lk.ijse.parkingspaceservice.dto.ParkingDTO;
-import lk.ijse.paymentservice.dto.ResponseDTO;
-import lk.ijse.paymentservice.util.VarList;
 import lk.ijse.paymentservice.dto.PaymentDTO;
+import lk.ijse.paymentservice.dto.ResponseDTO;
 import lk.ijse.paymentservice.service.PaymentService;
+import lk.ijse.paymentservice.util.VarList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,34 +12,32 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping(path ="/api/v1/payments")
+@RequestMapping(path = "/api/v1/payments")
 public class PaymentController {
     @Autowired
     private PaymentService paymentService;
+
     @PostMapping(value = "/savePayment")
     public ResponseEntity<ResponseDTO> savePayment(@RequestBody PaymentDTO paymentDTO) {
         System.out.println("controller savePayment...........");
         try {
             Date date = Date.valueOf(LocalDate.now());
             LocalTime time = LocalTime.now();
-            System.out.println("date        "+date);
-            System.out.println("time        "+time);
+            System.out.println("date        " + date);
+            System.out.println("time        " + time);
 
             paymentDTO.setPaymentDate(date);
             paymentDTO.setPaymentTime(Time.valueOf(time));
             paymentDTO.setBookingDate(date);
             ResponseDTO res = paymentService.savePaymentAndTransaction(paymentDTO);
 
-            switch(res.getCode()) {
+            switch (res.getCode()) {
                 case VarList.Created -> {
                     System.out.println("Payment Transaction is Successfully created");
                     return ResponseEntity.ok(new ResponseDTO(VarList.Created, res.getMessage(), res.getData()));
