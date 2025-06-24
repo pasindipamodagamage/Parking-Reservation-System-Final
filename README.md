@@ -1,19 +1,41 @@
-# Smart Parking Management System (SPMS)
+# 🚗 Parking Reservation System
 
-Microservice-based parking management solution for urban environments.
+A **microservice-based parking management solution** designed for modern urban environments.
 
-## Architecture
-- Spring Boot Microservices
-- Eureka Service Discovery
-- Spring Cloud Config
-- API Gateway
+---
 
-## Services
-1. User Service - Manages user accounts
-2. Parking Service - Manages parking spaces
-3. Vehicle Service - Manages vehicle information
-4. Payment Service - Handles payment processing
+## 🏗️ Architecture Overview
 
-## Resources
-- [Postman Collection](./docs/JSON/SPMS%20Testing.postman_collection.json)
-- ![Eureka Dashboard](./docs/screenShots/eureka_Dashboard.png)
+- ✅ **Spring Boot Microservices**
+- ✅ **Eureka Service Discovery**
+- ✅ **Spring Cloud Config**
+- ✅ **API Gateway**
+
+---
+
+## 🧩 Microservices
+
+1. **User Service** – Manages user accounts and authentication
+2. **Parking Service** – Manages available parking spaces
+3. **Vehicle Service** – Handles vehicle registration and data
+4. **Payment Service** – Processes user payments securely
+
+---
+
+## 📂 Resources
+
+- 📫 **Postman Collection**:  
+  [SPMS Testing Postman Collection](./docs/JSON/SPMS%20Testing.postman_collection.json)
+
+
+- 📊 **Eureka Dashboard Screenshot**:  
+  ![Eureka Dashboard](./docs/screenShots/eureka_Dashboard.png)
+
+---
+
+## 🔗 Repository
+
+For complete source code and documentation, visit the GitHub repository:  
+👉 [https://github.com/pasindipamodagamage/Parking-Reservation-System-Final.git](https://github.com/pasindipamodagamage/Parking-Reservation-System-Final.git)
+
+---
