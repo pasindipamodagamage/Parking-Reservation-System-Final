@@ -1,6 +1,5 @@
 package lk.ijse.userservice.dto;
 
-
 import lk.ijse.userservice.entity.UserRole;
 import lombok.*;
 

@@ -1,10 +1,8 @@
 package lk.ijse.userservice.controller;
 
-
 import lk.ijse.userservice.dto.ResponseDTO;
 import lk.ijse.userservice.dto.UserDTO;
-import lk.ijse.userservice.dto.UserDTO2;
-import lk.ijse.userservice.entity.User;
+import lk.ijse.userservice.dto.AuthDTO;
 import lk.ijse.userservice.service.UserService;
 import lk.ijse.userservice.util.VarList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +23,15 @@ public class UserController {
 
 
     @PostMapping(value = "/saveUser")
-    public ResponseEntity<ResponseDTO>  SaveUser(@RequestBody UserDTO user){
+    public ResponseEntity<ResponseDTO> SaveUser(@RequestBody UserDTO user) {
         System.out.println("User Data Come to Controller :" + user);
-        try{
+        try {
             Date date = Date.valueOf(LocalDate.now());
             user.setCreatedAt(date);
             System.out.println("User Data Come to Controller :" + user);
 
             int res = userService.saveUser(user);
-            switch(res){
+            switch (res) {
                 case VarList.Created -> {
                     System.out.println("Create User Success");
                     return ResponseEntity.ok(new ResponseDTO(VarList.Created, "User saved successfully", user));
@@ -50,13 +48,13 @@ public class UserController {
                             .body(new ResponseDTO(VarList.Internal_Server_Error, "Error saving User", null));
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException();
         }
     }
 
     @PutMapping(value = "/updateUser")
-    public ResponseEntity<ResponseDTO>  UpdateUser(@RequestBody UserDTO user) {
+    public ResponseEntity<ResponseDTO> UpdateUser(@RequestBody UserDTO user) {
         System.out.println("User Data Come to Controller :" + user);
 
         try {
@@ -89,61 +87,62 @@ public class UserController {
     }
 
     @GetMapping(value = "/getUserInfo")
-    public ResponseEntity<ResponseDTO> getMemberByUserId(@RequestBody UserDTO2 user){
-            System.out.println("Request Accepted get User");
+    public ResponseEntity<ResponseDTO> getMemberByUserId(@RequestBody AuthDTO user) {
+        System.out.println("Request Accepted get User");
 
-            UserDTO userDTO = userService.getUserByEmail(user.getEmail());
+        UserDTO userDTO = userService.getUserByEmail(user.getEmail());
 
-            if (userDTO == null) {
-                return ResponseEntity.ok(
-                        new ResponseDTO(VarList.Not_Found, "not found a member", null)
-                );
-            } else {
-                return ResponseEntity.ok(
-                        new ResponseDTO(VarList.OK, "Member detail", userDTO)
-                );
+        if (userDTO == null) {
+            return ResponseEntity.ok(
+                    new ResponseDTO(VarList.Not_Found, "not found a member", null)
+            );
+        } else {
+            return ResponseEntity.ok(
+                    new ResponseDTO(VarList.OK, "Member detail", userDTO)
+            );
 
-        }}
+        }
+    }
 
 
     @DeleteMapping(value = "/deleteUser")
-    public ResponseEntity<ResponseDTO>  DeleteUser(@RequestBody UserDTO2 user) {
-                System.out.println("User Data Come to Controller for delete :" + user);
+    public ResponseEntity<ResponseDTO> DeleteUser(@RequestBody AuthDTO user) {
+        System.out.println("User Data Come to Controller for delete :" + user);
 
-                try {
+        try {
 
-                    int res = userService.deleteUser(user.getEmail(),user.getPassword());
-                    switch (res) {
-                        case VarList.OK -> {
-                            System.out.println("Delete User Success");
-                            return ResponseEntity.ok(new ResponseDTO(VarList.OK, "User Delete successfully", user));
-                        }
-                        case VarList.Not_Found -> {
-                            System.out.println("User Not Found");
-                            ResponseDTO response = new ResponseDTO(VarList.Not_Found, "User Not Found", null);
-                            return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
-                        }
-
-                        default -> {
-                            System.out.println("User Not exists");
-                            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                                    .body(new ResponseDTO(VarList.Internal_Server_Error, "Error saving User", null));
-                        }
-                    }
-                } catch (Exception e) {
-                    throw new RuntimeException();
+            int res = userService.deleteUser(user.getEmail(), user.getPassword());
+            switch (res) {
+                case VarList.OK -> {
+                    System.out.println("Delete User Success");
+                    return ResponseEntity.ok(new ResponseDTO(VarList.OK, "User Delete successfully", user));
+                }
+                case VarList.Not_Found -> {
+                    System.out.println("User Not Found");
+                    ResponseDTO response = new ResponseDTO(VarList.Not_Found, "User Not Found", null);
+                    return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
                 }
 
+                default -> {
+                    System.out.println("User Not exists");
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                            .body(new ResponseDTO(VarList.Internal_Server_Error, "Error saving User", null));
+                }
             }
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+
+    }
 
 
     @GetMapping(value = "/getAllUser")
-    public List<UserDTO> getAll(){
+    public List<UserDTO> getAll() {
         List<UserDTO> userList = userService.getAll();
         return userList;
 
     }
-    }
+}
 
 
 
