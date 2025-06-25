@@ -1,10 +1,11 @@
-package lk.ijse.parkingspaceservice.service;
+package lk.ijse.parkingspaceservice.service.impl;
 
 import lk.ijse.parkingspaceservice.config.RandomNumberGenarator;
 import lk.ijse.parkingspaceservice.dto.ParkingDTO;
 import lk.ijse.parkingspaceservice.entity.Parking;
 import lk.ijse.parkingspaceservice.repo.ParkingRepo;
-import lk.ijse.parkingspaceservice.repo.UserRepository;
+import lk.ijse.parkingspaceservice.repo.UserRepo;
+import lk.ijse.parkingspaceservice.service.ParkingService;
 import lk.ijse.parkingspaceservice.util.VarList;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -20,7 +21,7 @@ import java.util.UUID;
 @Transactional
 public class ParkingServiceImpl implements ParkingService {
     @Autowired
-    private UserRepository userRepository;
+    private UserRepo userRepo;
 
     @Autowired
     private ParkingRepo parkingRepo;
@@ -33,7 +34,7 @@ public class ParkingServiceImpl implements ParkingService {
     public int saveParkingPlace(ParkingDTO parkingDTO) {
         System.out.println("saveParkingPlace");
         try {
-            if (userRepository.existsUserByEmail(parkingDTO.getEmail().toLowerCase())) {
+            if (userRepo.existsUserByEmail(parkingDTO.getEmail().toLowerCase())) {
                 if (parkingRepo.existsParkingByLocation(parkingDTO.getLocation())) {
                     return VarList.All_Ready_Added;
                 }
@@ -62,7 +63,7 @@ public class ParkingServiceImpl implements ParkingService {
     public int updateParkingPlace(ParkingDTO parkingDTO) {
         System.out.println("updateParkingPlace  " + parkingDTO);
         try {
-            if (userRepository.existsUserByEmail(parkingDTO.getEmail().toLowerCase())) {
+            if (userRepo.existsUserByEmail(parkingDTO.getEmail().toLowerCase())) {
                 if (parkingRepo.existsParkingById(parkingDTO.getId())) {
                     Parking parking = parkingRepo.findById(parkingDTO.getId()).get();
                     parking.setAvailable(true);
@@ -104,7 +105,7 @@ public class ParkingServiceImpl implements ParkingService {
 
         System.out.println("deleteParkingPlace");
         try {
-            if (userRepository.existsUserByEmail(email.toLowerCase())) {
+            if (userRepo.existsUserByEmail(email.toLowerCase())) {
                 if (parkingRepo.existsById(id) || parkingRepo.existsParkingByLocationCode(LocationCode)) {
                     Parking parking = parkingRepo.findById(id).get();
                     parkingRepo.delete(parking);

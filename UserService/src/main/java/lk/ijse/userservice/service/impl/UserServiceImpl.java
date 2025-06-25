@@ -1,9 +1,10 @@
-package lk.ijse.userservice.service;
+package lk.ijse.userservice.service.impl;
 
 
 import lk.ijse.userservice.dto.UserDTO;
 import lk.ijse.userservice.entity.User;
-import lk.ijse.userservice.repo.UserRepository;
+import lk.ijse.userservice.repo.UserRepo;
+import lk.ijse.userservice.service.UserService;
 import lk.ijse.userservice.util.VarList;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -19,7 +20,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepo userRepo;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
     public int saveUser(UserDTO user) {
         System.out.println("Save User come" + user);
         try {
-            if (userRepository.existsUserByEmail(user.getEmail())) {
+            if (userRepo.existsUserByEmail(user.getEmail())) {
                 return VarList.All_Ready_Added;
             }
             String email = user.getEmail().toLowerCase();
@@ -43,7 +44,7 @@ public class UserServiceImpl implements UserService {
             User user2 = modelMapper.map(user, User.class);
             System.out.println("Userrrr" + user2);
 
-            User user1 = userRepository.save(user2);
+            User user1 = userRepo.save(user2);
             System.out.println("user Save " + user1);
             return VarList.Created;
 
@@ -61,8 +62,8 @@ public class UserServiceImpl implements UserService {
         try {
             String email = user.getEmail().toLowerCase();
 
-            if (userRepository.existsUserByEmail(email)) {
-                User user1 = userRepository.findByEmail(email);
+            if (userRepo.existsUserByEmail(email)) {
+                User user1 = userRepo.findByEmail(email);
                 user1.setName(user.getName());
                 user1.setEmail(email);
                 user1.setRole(user.getRole());
@@ -70,7 +71,7 @@ public class UserServiceImpl implements UserService {
                 user1.setPassword(passwordEncoder.encode(user.getPassword()));
 
 
-                User user2 = userRepository.save(user1);
+                User user2 = userRepo.save(user1);
                 System.out.println("new update User " + user2);
 
                 return VarList.OK;
@@ -88,10 +89,10 @@ public class UserServiceImpl implements UserService {
             String email = email1.toLowerCase();
             String pass = password;
 
-            if (userRepository.existsUserByEmail(email)) {
-                User user = userRepository.findByEmail(email);
+            if (userRepo.existsUserByEmail(email)) {
+                User user = userRepo.findByEmail(email);
                 if (passwordEncoder.matches(pass, user.getPassword())) {
-                    userRepository.delete(user);
+                    userRepo.delete(user);
                     return VarList.OK;
                 }
 
@@ -104,7 +105,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> getAll() {
-        List<User> users = userRepository.findAll();
+        List<User> users = userRepo.findAll();
         return modelMapper.map(users, new TypeToken<List<UserDTO>>() {
         }.getType());
 
@@ -114,8 +115,8 @@ public class UserServiceImpl implements UserService {
     public UserDTO getUserByEmail(String email1) {
 
         String email = email1.toLowerCase();
-        if (userRepository.existsUserByEmail(email)) {
-            User user = userRepository.findByEmail(email);
+        if (userRepo.existsUserByEmail(email)) {
+            User user = userRepo.findByEmail(email);
             return modelMapper.map(user, UserDTO.class);
         }
         return null;

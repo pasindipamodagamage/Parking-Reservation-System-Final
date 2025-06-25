@@ -1,4 +1,4 @@
-package lk.ijse.paymentservice.service;
+package lk.ijse.paymentservice.service.impl;
 
 import lk.ijse.parkingspaceservice.util.VarList;
 import lk.ijse.paymentservice.dto.PaymentDTO;
@@ -7,6 +7,7 @@ import lk.ijse.paymentservice.entity.Parking;
 import lk.ijse.paymentservice.entity.Payment;
 import lk.ijse.paymentservice.repo.ParkingRepo;
 import lk.ijse.paymentservice.repo.PaymentRepo;
+import lk.ijse.paymentservice.service.PaymentService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import java.util.List;
 @Service
 @Transactional
 public class PaymentServiceImpl implements PaymentService {
+
     @Autowired
     private PaymentRepo paymentRepo;
 
@@ -28,43 +30,16 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     private ModelMapper modelMapper;
 
-<<<<<<< HEAD
     @Override
     public ResponseDTO savePaymentAndTransaction(PaymentDTO paymentDTO) {
         System.out.println("Processing payment and transaction for location: " + paymentDTO.getParkingLocation());
 
-        try {
-            if (paymentDTO == null) {
-                System.out.println("Error: Payment data is null");
-                return new ResponseDTO(VarList.Bad_Request, "Payment data cannot be null", null);
-=======
-@Override
-public ResponseDTO savePaymentAndTransaction(PaymentDTO paymentDTO) {
-    System.out.println("Processing payment and transaction for location: " + paymentDTO.getParkingLocation());
-
-    try {
         if (paymentDTO == null) {
             System.out.println("Error: Payment data is null");
             return new ResponseDTO(VarList.Bad_Request, "Payment data cannot be null", null);
         }
 
-        Parking parking = parkingRepo.findByLocation(paymentDTO.getParkingLocation().toLowerCase());
-        if (parking == null) {
-            System.out.println("Error: Parking location not found - " + paymentDTO.getParkingLocation());
-            return new ResponseDTO(VarList.Not_Found, "Parking location not found", null);
-        }
-
-        Payment payment = modelMapper.map(paymentDTO, Payment.class);
-        payment.setAmount(parking.getPayAmount());
-
-        if(parking.isAvailable()){
-            Payment savedPayment = paymentRepo.save(payment);
-            if (savedPayment == null) {
-                System.out.println("Error: Failed to save payment");
-                return new ResponseDTO(VarList.Conflict, "Failed to save payment", null);
->>>>>>> 396d9236c212694755483116a10aa5287d45bab1
-            }
-
+        try {
             Parking parking = parkingRepo.findByLocation(paymentDTO.getParkingLocation().toLowerCase());
             if (parking == null) {
                 System.out.println("Error: Parking location not found - " + paymentDTO.getParkingLocation());
@@ -81,7 +56,6 @@ public ResponseDTO savePaymentAndTransaction(PaymentDTO paymentDTO) {
                     return new ResponseDTO(VarList.Conflict, "Failed to save payment", null);
                 }
 
-
                 parking.setAvailable(false);
                 Parking updatedParking = parkingRepo.save(parking);
                 if (updatedParking == null) {
@@ -93,9 +67,9 @@ public ResponseDTO savePaymentAndTransaction(PaymentDTO paymentDTO) {
                 System.out.println("Successfully processed payment ID: " + savedPayment.getPaymentId() +
                         " for parking: " + parking.getLocation());
                 return new ResponseDTO(VarList.Created, "Transaction completed successfully", savedPayment);
-
+            } else {
+                return new ResponseDTO(VarList.Conflict, "Parking spot not available", null);
             }
-            return new ResponseDTO(VarList.Conflict, "Operation failed", null);
 
         } catch (DataAccessException e) {
             System.out.println("Database error while processing payment: " + e.getMessage());
@@ -111,7 +85,6 @@ public ResponseDTO savePaymentAndTransaction(PaymentDTO paymentDTO) {
         List<Payment> paymentList = paymentRepo.findAll();
         return modelMapper.map(paymentList, new TypeToken<List<PaymentDTO>>() {
         }.getType());
-
     }
 
     @Override
