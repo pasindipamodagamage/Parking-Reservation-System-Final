@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"id\":\"\",\n\"name\":\"Vishan\",\n\"email\":\"Vishanchathuranga2003@gmail.com\",\n\"password\":\"Vishan2003###\",\n\"role\":\"OWNER\",\n\"createdAt\":\"\"\n}\n",
+							"raw": "{\n\"id\":\"\",\n\"name\":\"Pasindi\",\n\"email\":\"pasidingamage@gmail.com\",\n\"password\":\"Indy@2002\",\n\"role\":\"OWNER\",\n\"createdAt\":\"\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -59,7 +59,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"name\":\"Meedum Sandunika\",\n\"email\":\"vishan.chathuranga10@gmail.com\",\n\"password\":\"Vishan2003###\",\n\"role\":\"OWNER\"\n}"
+							"raw": "{\n\"name\":\"Thedanga Gayathri\",\n\"email\":\"thedagaya@gmail.com\",\n\"password\":\"theda2007\",\n\"role\":\"OWNER\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/v1/users/updateUser",
@@ -85,7 +85,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"email\":\"vishan.chathuranga3@gmail.com\",\n\"password\":\"Vishan20##\"\n}",
+							"raw": "{\n\"email\":\"pasindipamoda@gmail.com\",\n\"password\":\"Pasi@2002\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -119,7 +119,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"email\":\"vishan.chathuranga10@gmail.com\"\n}",
+							"raw": "{\n\"email\":\"thedagaya@gmail.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -163,7 +163,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\n    \"licensePlate\": \"PQR-6789\",\n    \"model\": \"Audi Q7 2021\",\n    \"email\": \"vishanchathuranga1234@gmail.com\"\n  }",
+							"raw": " {\n    \"licensePlate\": \"ABC-1234\",\n    \"model\": \"Audi Q7 2021\",\n    \"email\": \"pasindipamodagamage@gmail.com\"\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -194,7 +194,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\n    \"licensePlate\": \"PQR-6789\",\n    \"model\": \"Audi Q88 2021\",\n    \"email\": \"vishanchathuranga1234@gmail.com\"\n  }",
+							"raw": " {\n    \"licensePlate\": \"ABC-1234\",\n    \"model\": \"Audi Q88 2021\",\n    \"email\": \"pasindipamodagamage@gmail.com\"\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -225,7 +225,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\n    \"licensePlate\": \"PQR-6789\",\n    \"email\": \"vishanchathuranga1234@gmail.com\"\n  }",
+							"raw": " {\n    \"licensePlate\": \"ABC-1234\",\n    \"email\": \"pasindipamodagamage@gmail.com\"\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -277,7 +277,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "  {\n    \"location\": \"903 Poplar Way\",\n    \"city\": \"Washington\",\n    \"available\": false,\n    \"email\": \"megan.carter@example.com\",\n    \"payAmount\": 2550\n  }",
+							"raw": "  {\n    \"location\": \"no.22-B Temple Road\",\n    \"city\": \"Baddegama\",\n    \"available\": false,\n    \"email\": \"reservationavailable@gmail.com\",\n    \"payAmount\": 2550\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -308,7 +308,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\":\"6d5c46d7-a9fb-4c7e-94d2-d881f5bb22fe\",\n    \"location\": \"903 pr way\",\n    \"locationCode\":859075,\n    \"city\": \"Washinton\",\n    \"available\": false,\n    \"email\": \"megan.carter@example.com\",\n    \"payAmount\": 2550\n  }",
+							"raw": "{\n    \"id\":\"6d5c46d7-a9fb-4c7e-94d2-d881f5bb22fe\",\n    \"location\": \"903 pr way\",\n    \"locationCode\":859075,\n    \"city\": \"Galle\",\n    \"available\": false,\n    \"email\": \"reservationavailable@gmail.com\",\n    \"payAmount\": 2550\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -345,7 +345,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\":\"6d5c46d7-a9fb-4c7e-94d2-d881f5bb22fe\",\n    \"locationCode\":859075,\n    \"email\": \"megan.carter@example.com\"\n  }"
+							"raw": "{\n    \"id\":\"6d5c46d7-a9fb-4c7e-94d2-d881f5bb22fe\",\n    \"locationCode\":859075,\n    \"email\": \"reservationavailable@gmail.com\"\n  }"
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/v1/parking/deleteParking",
@@ -392,7 +392,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"licensePlate\":\"PQR-6789\",\n    \"userEmail\":\"vishanchathuranga1234@gmail.com\",\n    \"parkingLocation\":\"123 main street\"\n\n}",
+							"raw": "{\n    \"licensePlate\":\"ABC-1234\",\n    \"userEmail\":\"pasindipamodagamage@gmail.com\",\n    \"parkingLocation\":\"123 main street\"\n\n}",
 							"options": {
 								"raw": {
 									"language": "json"
